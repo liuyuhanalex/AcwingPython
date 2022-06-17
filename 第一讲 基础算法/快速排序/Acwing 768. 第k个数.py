@@ -20,7 +20,7 @@ def quick_sort(arr: List[int], l: int, r: int, k):
     if j - l + 1 >= k:
         return quick_sort(arr, l, j, k)
     else:
-        return quick_sort(arr, j + 1, r, k-( j -l +1))
+        return quick_sort(arr, j + 1, r, k - (j - l + 1))
 
 
 if __name__ == '__main__':
