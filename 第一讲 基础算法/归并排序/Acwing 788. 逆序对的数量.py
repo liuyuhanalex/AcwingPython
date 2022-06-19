@@ -3,14 +3,12 @@
 # 3. 在归并过程中每次输出 qj 的时候加上一个 mid - i + 1
 from typing import List
 
-tmp_cnt = 0
 
 def merge_sort(arr: List[int], l: int, r: int):
-    global tmp_cnt
     if l >= r:
-        return
+        return 0
     mid = (l + r) // 2
-    merge_sort(arr, l, mid), merge_sort(arr, mid+1, r)
+    res = merge_sort(arr, l, mid) + merge_sort(arr, mid+1, r)
     i, j, tmp = l, mid + 1, []
     while i <= mid and j <= r:
         if arr[i] <= arr[j]:
@@ -18,17 +16,17 @@ def merge_sort(arr: List[int], l: int, r: int):
             i += 1
         else:
             tmp.append(arr[j])
-            tmp_cnt += mid - i + 1
+            res += mid - i + 1
             j += 1
     if i <= mid:
         tmp += arr[i: mid+1]
     if j <= r:
         tmp += arr[j: r+1]
     arr[l: r+1] = tmp
+    return res
 
 
 if __name__ == '__main__':
     n = int(input())
     arr = [int(i) for i in input().split(' ')]
-    merge_sort(arr, 0, n - 1)
-    print(tmp_cnt)
+    print(merge_sort(arr, 0, n - 1))
